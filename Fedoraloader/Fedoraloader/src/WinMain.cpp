@@ -5,8 +5,8 @@
 
 #include <VersionHelpers.h>
 
-#define CHECK_ARG(szArg, bOut) if (_wcsicmp(arg, L##szArg) == 0) { (bOut) = true; continue; }
-#define CHECK_ARG_STR(szArg, szOut) if (_wcsicmp(arg, L##szArg) == 0 && ++i < nArgs) { const auto nextArg = szArglist[i]; (szOut) = std::wstring(nextArg); continue; }
+#define CHECK_ARG(szArg, bOut) if (wcscmp(arg, L##szArg) == 0) { (bOut) = true; continue; }
+#define CHECK_ARG_STR(szArg, szOut) if (wcscmp(arg, L##szArg) == 0 && i < nArgs - 1) { const auto nextArg = szArglist[++i]; (szOut) = std::wstring(nextArg); continue; }
 
 LaunchInfo GetLaunchInfo()
 {
@@ -47,15 +47,14 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _
     // Apparently people are still using Windows 7 in 2023...
     if (!IsWindows8OrGreater())
     {
-	    MessageBoxA(nullptr, "Your Windows version is no longer supported!\nPlease upgrade to Windows 8 or above.", "Outdated OS", MB_OK | MB_ICONWARNING);
-        return EXIT_FAILURE;
+	    MessageBoxA(nullptr, "Your Windows version is outdated and will most likely not work!", "Outdated OS", MB_OK | MB_ICONWARNING);
     }
 
     // Check privileges
     if (!Utils::IsElevated())
     {
         MessageBoxA(nullptr, "Please restart Fedoraloader as administrator!", "Missing elevation", MB_OK | MB_ICONWARNING);
-	    return EXIT_FAILURE;
+	    return 0;
     }
 
     try
