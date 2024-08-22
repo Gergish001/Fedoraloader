@@ -72,7 +72,7 @@ bool Loader::Load(const LaunchInfo& launchInfo)
 
 	// Find the game
 	Log::Info("Waiting for game...");
-	const HANDLE hGame = Utils::WaitForProcessHandle("hl2.exe", 90);
+	const HANDLE hGame = Utils::WaitForProcessHandle("tf2.exe", 90);
 	if (hGame == INVALID_HANDLE_VALUE || hGame == nullptr)
 	{
 		throw std::runtime_error("Timeout while waiting for game");
@@ -92,7 +92,7 @@ bool Loader::Debug(const LaunchInfo& launchInfo)
 
 	// Find the game
 	Log::Info("Waiting for game...");
-	const HANDLE hGame = Utils::GetProcessHandle("hl2.exe");
+	const HANDLE hGame = Utils::GetProcessHandle("tf2.exe");
 	if (hGame == INVALID_HANDLE_VALUE || hGame == nullptr)
 	{
 		throw std::runtime_error("Failed to get game handle");
