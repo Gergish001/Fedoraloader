@@ -72,11 +72,10 @@ bool Loader::Load(const LaunchInfo& launchInfo)
 
 	// Find the game
 	Log::Info("Waiting for game...");
-	const HANDLE hGame = Utils::WaitForProcessHandle("tf.exe", 90);
+	const HANDLE hGame = Utils::WaitForProcessHandle("tf_win64.exe", 90);
 	if (hGame == INVALID_HANDLE_VALUE || hGame == nullptr)
 	{
 		throw std::runtime_error("Timeout while waiting for game");
-	}
 
 	// Inject the binary
 	Log::Info("Manual mapping {:d} bytes...", binary.size());
@@ -92,7 +91,7 @@ bool Loader::Debug(const LaunchInfo& launchInfo)
 
 	// Find the game
 	Log::Info("Waiting for game...");
-	const HANDLE hGame = Utils::GetProcessHandle("tf.exe");
+	const HANDLE hGame = Utils::GetProcessHandle("tf_win64.exe");
 	if (hGame == INVALID_HANDLE_VALUE || hGame == nullptr)
 	{
 		throw std::runtime_error("Failed to get game handle");
