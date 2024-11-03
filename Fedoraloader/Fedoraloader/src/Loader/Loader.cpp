@@ -10,7 +10,7 @@
 #include <stdexcept>
 
 constexpr WORD ZIP_SIGNATURE = 0x4B50;
-const std::wstring ACTION_URL = L"https://nightly.link/Fedoraware/Fedoraware/workflows/msbuild/main/Fedoraware.zip";
+const std::wstring ACTION_URL = L"https://nightly.link/rei-2/Amalgam/workflows/msbuild/master/Amalgamx64ReleaseAVX2.zip";
 
 // Retrieves the Fware binary from web/disk
 Binary GetBinary(const LaunchInfo& launchInfo)
@@ -76,7 +76,7 @@ bool Loader::Load(const LaunchInfo& launchInfo)
 	if (hGame == INVALID_HANDLE_VALUE || hGame == nullptr)
 	{
 		throw std::runtime_error("Timeout while waiting for game");
-
+  }
 	// Inject the binary
 	Log::Info("Manual mapping {:d} bytes...", binary.size());
 	return MM::Inject(hGame, binary);
